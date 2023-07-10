@@ -10,11 +10,12 @@ export async function initiateLogin({
 }: InitiateLoginCode) {
   try {
     const result = await fetch(
-      `${AUTH_BLING_ENDPOINT}/initiate-login?companyId=${companyId}
-            &phoneNumber=${phoneNumber ? phoneNumber : ""}
-            &email=${email ? email : ""}`
+      `${AUTH_BLING_ENDPOINT}/initiate-login?companyId=${companyId}&phoneNumber=${
+        phoneNumber ? phoneNumber : ""
+      }&email=${email ? email : ""}`
     );
-    return (await result.json()) as string;
+
+    return result.text();
   } catch (err) {
     throw err;
   }
@@ -28,9 +29,9 @@ export async function validateLoginCode({
 }: ValidateLoginCode) {
   try {
     const result = await fetch(
-      `${AUTH_BLING_ENDPOINT}/validate-login-code?companyId=${companyId}
-      &phoneNumber=${phoneNumber ? phoneNumber : ""}
-      &email=${email ? email : ""}&validationCode=${validationCode}`
+      `${AUTH_BLING_ENDPOINT}/validate-login-code?companyId=${companyId}&phoneNumber=${
+        phoneNumber ? phoneNumber : ""
+      }&email=${email ? email : ""}&validationCode=${validationCode}`
     );
 
     return await result.json();
